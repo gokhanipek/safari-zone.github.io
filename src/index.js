@@ -1,10 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import SafariZone from './safari-zone/safari-zone'
+import Home from './home/home'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { BrowserRouter, Route } from 'react-router-dom';
+import Success from './result/success';
+import Failure from './result/failure';
+
+
+
+
+ReactDOM.render((  
+    <BrowserRouter>
+      <Route exact path="/" component={Home} />
+      <Route path="/SafariZone" component={SafariZone} />
+      <Route path="/success" component={Success} />
+      <Route path="/failure" component={Failure} />
+    </BrowserRouter>
+), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
