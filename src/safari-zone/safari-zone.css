@@ -1,4 +1,5 @@
-.safari-zone {
-    width: 400px;
-    margin: 50px auto;
-}
+body {
+    background-image:url('/img/grass.png');
+    background-repeat: repeat;
+    background-size: contain;
+  }

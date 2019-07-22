@@ -2,12 +2,16 @@
     position: relative;
     width: 100px;
     height: 100px;
-    border: none;
+    border: none !important;
     display: inline-block;
+    background: transparent !important;
+
 }
 
 .card img {
     width: 100%;
+    border: none !important;
+    background: transparent !important;
 }
 
 .card .back, .card .front {

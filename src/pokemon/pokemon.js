@@ -16,7 +16,7 @@ export default class Pokemon extends React.Component {
     render(){
       return (
         <div className={
-            "col-md-4 col-sm-4 card" + (!this.props.close ? ' opened' : '') + (
+            "col col-3 card " + (!this.props.close ? ' opened' : '') + (
                 this.props.complete ? ' matched' : ''
                 )} 
             onClick={

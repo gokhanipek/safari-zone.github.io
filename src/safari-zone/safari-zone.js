@@ -19,7 +19,7 @@ export default class SafariZone extends React.Component {
           encounteredPokemons: [],
           catchedPokemons: [],
           rounds: 0,
-          stonesLeft: 20,
+          pokeballsLeft: 20,
         }
         this.start()
       }
@@ -69,7 +69,7 @@ export default class SafariZone extends React.Component {
       check(){
         let pokemonPositions= this.state.pokemonPositions;
         let catchedPokemons = this.state.catchedPokemons;
-        const stonesLeft = this.state.stonesLeft;
+        const pokeballsLeft = this.state.pokeballsLeft;
         const numVal = this.state.rounds;
 
 
@@ -84,11 +84,11 @@ export default class SafariZone extends React.Component {
 
         this.setState({
           rounds: numVal + 1,
-          stonesLeft: stonesLeft - 1,
+          pokeballsLeft: pokeballsLeft - 1,
           pokemonPositions,
           encounteredPokemons: []
         })
-        console.warn(this.state.stonesLeft , catchedPokemons.length)
+        console.warn(this.state.pokeballsLeft , catchedPokemons.length)
       }
 
       shuffle(array){
@@ -104,33 +104,40 @@ export default class SafariZone extends React.Component {
       }
       
       render(){
-        if(this.state.catchedPokemons.length == 16 || this.state.stonesLeft == 0){
+        if(this.state.catchedPokemons.length == 16 || this.state.pokeballsLeft == 0){
             console.log('game finished')
             const newTo = { 
                 pathname: "", 
                 userName: this.props.location.userName,
-                stones: this.state.stonesLeft
+                pokeballs: this.state.pokeballsLeft
               };
             this.state.catchedPokemons.length == 16 ? newTo.pathname = "/success" : newTo.pathname = "/failure"
             return <Redirect to={newTo} />
          }
         
         return (
-          <div className="safari-zone">
-            <h1>Hello { this.props.location.userName }</h1>
-            <h2>Round: {this.state.rounds}</h2>
-            <h3>Pokeballs: {this.state.stonesLeft}</h3>
-            <h3>Pokemons Catched: {this.state.catchedPokemons.length}</h3>
-            {
-              this.state.pokemonPositions.map((pokemon, index) => {
-                return <Pokemon 
-                    pokemon={pokemon.name} 
-                    click={() => this.state.encounteredPokemons.length ==  2 ? null : this.handleClick(pokemon.name,index)} 
-                    close={pokemon.close} 
-                    complete={pokemon.complete}/>
-              })
-            }
-          </div>
+            <div className="container safari-zone pt-3">
+                <div className="justify-content-center">
+                    <div className="col col-12 align-self-center">
+                        <div className="bs-component">
+                            <h4>Hello { this.props.location.userName }</h4>
+                            <p className="text-light font-weight-bold">Round: <strong>{this.state.rounds}</strong> - Pokeballs: <strong>{this.state.pokeballsLeft}</strong></p>
+                            <p className="text-light font-weight-bold">Pokemons Catched: <strong>{this.state.catchedPokemons.length}</strong>.</p>
+                            <div className="row">
+                            {
+                            this.state.pokemonPositions.map((pokemon, index) => {
+                                return <Pokemon 
+                                    pokemon={pokemon.name} 
+                                    click={() => this.state.encounteredPokemons.length ==  2 ? null : this.handleClick(pokemon.name,index)} 
+                                    close={pokemon.close} 
+                                    complete={pokemon.complete}/>
+                            })
+                            }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         )
       }
   }
